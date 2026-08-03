@@ -81,7 +81,8 @@
   .console-head .dots span{width:9px;height:9px;border-radius:50%;background:var(--line);}
   .console-head .label{margin-left:auto;color:var(--text-dim);font-size:11px;}
   .console-body{padding:14px 16px;height:230px;overflow:hidden;position:relative;}
-  .log-line{display:flex;gap:10px;padding:5px 0;color:var(--text-dim);white-space:nowrap;opacity:0;animation:fadein .4s forwards;border-bottom:1px dashed rgba(255,255,255,0.04);}
+  .log-line{white-space:normal;}
+  .log-line{display:flex;gap:10px;padding:5px 0;color:var(--text-dim);white-space:normal;flex-wrap:wrap;opacity:0;animation:fadein .4s forwards;border-bottom:1px dashed rgba(255,255,255,0.04);}
   .log-line .ts{color:#54607d;flex-shrink:0;}
   .log-line .ok{color:var(--teal);}
   .log-line .warn{color:var(--amber);}
@@ -181,8 +182,11 @@
 
   <section id="about">
     <div class="section-head"><span class="tag">01</span><h2>About</h2></div>
-    <p style="color:var(--text-dim);max-width:66ch;font-size:15px;">
-      I work at the intersection of security operations and identity — triaging alerts, tuning detections to cut through noise, and designing access controls that assume nothing and verify everything. Currently deepening my detection engineering and threat hunting skills through hands-on Zero Trust and identity governance labs, and pursuing SC-900, AZ-900, and SC-200. Based anywhere, open to roles that don't require 24x7 shift coverage — happy to discuss what schedule works.
+    <p style="color:var(--text-dim);max-width:none;font-size:15px;">
+      I work at the intersection of security operations and identity — triaging alerts, tuning detections to cut through noise, and designing access controls that assume nothing and verify everything. Day to day that means working across Microsoft Sentinel and Defender XDR to catch and investigate real threats, and standardizing runbooks so the team spends less time chasing noise and more time on what matters.
+    </p>
+    <p style="color:var(--text-dim);max-width:none;font-size:15px;margin-top:16px;">
+      Outside of core SOC work, I'm deepening my detection engineering and threat hunting skills through hands-on Zero Trust and identity governance labs — and I like exploring adjacent areas too, from building anomaly-detection dashboards to applying machine learning to real-world problems. Currently pursuing SC-900, AZ-900, and SC-200. Based anywhere, open to roles that don't require 24x7 shift coverage — happy to discuss what schedule works.
     </p>
   </section>
 
