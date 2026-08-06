@@ -96,7 +96,8 @@
 
   /* skills */
   .skill-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-  .skill-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;}
+  .skill-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;transition:transform .25s ease, border-color .25s ease;}
+  .skill-card:hover{transform:translateY(-3px);border-color:var(--amber);}
   .skill-card h3{font-family:var(--mono);font-size:12px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;}
   .skill-card p{font-size:13.5px;color:var(--text-dim);}
 
@@ -104,6 +105,9 @@
   .project{
     background:var(--panel);border:1px solid var(--line);border-radius:10px;
     padding:26px;margin-bottom:20px;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .project:hover{transform:translateY(-4px);border-color:var(--teal);}
   }
   .project-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
   .project-head h3{font-size:18px;font-weight:700;}
@@ -120,7 +124,8 @@
   /* other projects */
   .other-grid{display:grid;gap:18px;grid-template-columns:1fr;}
   @media(min-width:720px){.other-grid{grid-template-columns:1fr 1fr;}}
-  .other-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px;}
+  .other-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px;transition:transform .25s ease, border-color .25s ease;}
+  .other-card:hover{transform:translateY(-3px);border-color:var(--teal);}
   .other-card .meta{font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-bottom:8px;}
   .other-card h4{font-size:15.5px;margin-bottom:8px;}
   .other-card p{font-size:13.5px;color:var(--text-dim);}
@@ -136,6 +141,11 @@
   footer h2{font-size:24px;margin-bottom:10px;}
   footer p{color:var(--text-dim);margin-bottom:26px;}
   .foot-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  .hero-fade{opacity:0;transform:translateY(16px);animation:heroIn .7s ease forwards;}
+  @keyframes heroIn{to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
@@ -336,6 +346,28 @@ function addLine(){
 }
 for(let i=0;i<7;i++) addLine();
 setInterval(addLine, 1800);
+
+// staggered hero entrance
+const heroEls = document.querySelectorAll('.hero .eyebrow, .hero h1, .hero .role-line, .hero .bio, .hero .cta-row, .console');
+heroEls.forEach((el,i)=>{
+  el.classList.add('hero-fade');
+  el.style.animationDelay = (i*0.1)+'s';
+});
+
+// scroll reveal for sections
+const revealTargets = document.querySelectorAll('.section-head, .project, .other-card, .skill-card, .cert-row');
+revealTargets.forEach(el=>el.classList.add('reveal'));
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15});
+
+revealTargets.forEach(el=>observer.observe(el));
 </script>
 
 </body>
